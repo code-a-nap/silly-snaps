@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <title>Silly Snaps: Where Laughter and Pictures Collide!</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var default_style = "/static/album.css";
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        var lnk = document.createElement('link');
+        var s = urlParams.get('style');
+        if(s != null){
+            s = window.location.origin + s;
+            lnk.href = s;
+        }
+        else {
+            lnk.href = default_style;
+        }
+        lnk.type = 'text/css';
+        lnk.rel = 'stylesheet';
+        var t = document.getElementsByTagName('head') [0];
+        t.appendChild(lnk);
+
+        var logoutBtn = document.getElementById("logoutBtn");
+        logoutBtn.addEventListener("click", (e) => {
+        document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
+        window.location.href = "/";
+    });
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)[0];
+        var img_src = button.closest(".card").children[0].src;
+        var reportBtn = document.getElementById("reportBtn");
+        reportBtn.img_src = img_src;
+        reportBtn.addEventListener("click", (e) => {
+            reportBtn.innerHTML = "";
+            reportBtn.classList.add("spinner-border");
+            window.location.href = "/report?url=" + e.currentTarget.img_src;
+        });
+    })
+    });
+  </script>
+
+  </head>
+  <body>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Report image to admin</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            Did you find this image offensive or inappropriate? Click on "Report" button and the image will be immediately reviewed by the administrator. 
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="reportBtn">Report
+            </button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-7 py-4">
+                <h4 class="text-white">About</h4>
+                <p class="text-muted">Well, well, well, what do we have here? It looks like we stumbled upon a website that's still under construction! Don't get too excited, though - this site might still be in its infancy, but that doesn't mean it's not packing a punch.
+
+                    With potential vulnerabilities lurking around every corner, this site is like a playground for hackers and mischief-makers alike. It's like leaving the front door of your house wide open and hoping no one decides to come in and steal your stuff. But hey, who needs security when you have a great sense of humor, right?
+                    
+                    In all seriousness, while a site under development may not be completely secure, it's important to keep in mind that it's still a work in progress. With some TLC and a little bit of elbow grease, this website could be the next big thing - vulnerabilities be darned! So, let's give a round of applause for the website developers out there, working tirelessly to create the next great online masterpiece, one vulnerability at a time.</p>
+              </div>
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4 class="text-white">Actions</h4>
+                <ul class="list-unstyled">
+                  <li><a href="/addPicture" class="text-white">Add Picture (coming soon)</a></li>
+                  <li><a href="#" id="logoutBtn" class="text-white">Logout</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark box-shadow">
+          <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+              <strong>Silly Snaps: Where Laughter and Pictures Collide!</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+      </header>
+  
+      <main role="main">
+  
+        <section class="jumbotron text-center">
+          <div class="container">
+            <h1 class="jumbotron-heading">Hi {{.Email}}!</h1>
+            <input name="secret" type="hidden" value={{.Secret}}>
+            <p class="lead text-muted">Are you tired of staring at dull websites that make you want to take a nap? Say goodbye to the yawns and hello to the giggles with our website! Our pictures aren't just eye-catching, they're sidesplitting. From cute animals doing silly things to people making ridiculous faces, you'll never be bored scrolling through our site. Plus, with every click, you'll burn a few calories from laughing so hard. So come on over and get your daily dose of laughter and entertainment. Warning: may cause spontaneous outbursts of joy.</p>
+          </div>
+        </section>
+  
+        <div class="album py-5 bg-light">
+          <div class="container">
+  
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/61fNA4fm1JL._AC_UF894,1000_QL80_.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text">Introducing the most fabulous feline in town: a cat wearing a top hat and monocle! This picture is the epitome of sophistication and class, with the added bonus of being hilarious because, well, it's a cat wearing a top hat and monocle! Whether you're a cat lover, a fan of dapper fashion, or just in need of a good laugh, this image is sure to tickle your fancy. So sit back, relax, and let this refined kitty whisk you away to a world of fancy feasts and fancy dress.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Report to admin</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <img class="card-img-top" src="https://t3.ftcdn.net/jpg/02/95/44/22/360_F_295442295_OXsXOmLmqBUfZreTnGo9PREuAPSLQhff.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text">This image features a majestic horse with bright red lipstick and glamorous eyeshadow - talk about a makeover! The horse's lips have been enhanced with bold color and the attention to detail on the eyeshadow is impressive. It's not every day that you see a horse dolled up with such a stunning makeup look! This humorous image is sure to put a smile on your face and bring some levity to your day. So, whether you're a horse enthusiast, a makeup lover, or just someone who appreciates a good laugh, this picture is bound to tickle your funny bone.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Report to admin</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <img class="card-img-top" src="https://pbs.twimg.com/media/DjHpyz_UUAAciYf.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text">It's a bird, it's a plane, it's...a dog in sunglasses?! This black beauty is clearly no ordinary pup - he's got style, he's got attitude, and most importantly, he's got a killer pair of shades.
+                      As he struts down the street, his head held high and his tail wagging with confidence, all eyes are on him. The other dogs can't help but stare in awe at his impeccable fashion sense. He's got that cool, laid-back vibe that screams, "I'm too cool for obedience school."
+                      It's clear that this pup knows how to make a statement. Whether he's lounging in the sun, chasing a ball, or just taking a leisurely stroll, he does it all with panache. And with his signature shades, he's always ready for his close-up.
+                      Move over, canine fashionistas - there's a new top dog in town, and he's got the sunglasses to prove it.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Report to admin</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <img class="card-img-top" src="https://i.pinimg.com/474x/9f/0b/92/9f0b929b9d40226e67ad584f39a8a009--pro-life-when-you-see-it.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text">This image captures a baby who looks like they've just found out they were born yesterday and they're already behind on their to-do list. With an expression that's equal parts anger and suspicion, this little one looks like they're ready to take on the world and give anyone who stands in their way a piece of their mind.
+
+                        It's almost as if the baby is saying, "I don't know who you are or what you want, but I will find out, and I will be very upset about it!" This comical image is sure to make you smile and possibly even laugh out loud, as it perfectly encapsulates the feisty spirit of babies who are ready to take on whatever challenges come their way, no matter how big or small. So, watch out world, this baby means business!</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Report to admin</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <img class="card-img-top" src="https://i.imgur.com/rvJ97sR.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text">If you're looking for a bold new hairdo, this man's got you covered - literally! In this image, a daring fellow has shaved a lawn mower pattern into his hair, complete with a tattoo of a lawn mower on the top of his head. This creative and hilarious hairstyle is sure to turn heads (pun intended) and leave people scratching their heads in wonder.
+
+                        It takes a brave soul to rock a look like this, but this guy pulls it off with confidence and style. He's not afraid to show off his love for lawn care, even if it means shaving a unique pattern into his hair. And let's not forget about the tattoo - that's some serious dedication to the craft of mowing lawns!
+                        
+                        So, whether you're a lawn care enthusiast or just someone who appreciates a good laugh, this image is sure to make you smile and give you some serious hair inspiration (or maybe just inspiration to do something wild and crazy). Just don't forget to wear sunscreen on your newly mowed scalp!</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Report to admin</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <img class="card-img-top" src="https://do.lolwot.com/wp-content/uploads/2016/03/10-funniest-faces-while-doing-sports-7.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text">You can tell that this guy takes his shot put seriously, but it's hard not to laugh at the funny expression on his face. With eyes bulging and a look of intense concentration, he's like a superhero using his powers for good. If only we could all summon that level of determination and focus when we need it most!
+
+                        Overall, this image is a great reminder that even the most serious of athletes can have a sense of humor, and that sometimes the most important competition is the one we have with ourselves to be the best we can be. So, go ahead and give it your all, even if it means making some silly faces along the way!</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Report to admin</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+  
+      </main>
+  
+      <footer class="text-muted">
+        <div class="container">
+          <p class="float-right">
+            <a href="#">Back to top</a>
+          </p>
+          <p>This website is using &copy; Bootstrap</p>
+        </div>
+      </footer>
+  </body>
+</html>
